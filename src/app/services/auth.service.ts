@@ -27,7 +27,7 @@ export class AuthService {
   login(body: AuthUserType) {
     return this.http
       .post<ResponseType<{ token: string }>>(
-        `${process.env['BACK_URL']}/auth/login`,
+        `${process.env['BACK_URL']}/auth/log-in`,
         body
       )
       .pipe(
