@@ -1,0 +1,67 @@
+<div class="container-login">
+  <div class="container-form">
+    <img src="https://avatars.githubusercontent.com/juancarlos301" alt="logo" />
+    <h3>Access to continue.</h3>
+    <form [formGroup]="myForm">
+      <div>
+        <mat-form-field
+          class="example-input"
+          style="font-size: 16px; width: 100%"
+        >
+          <mat-label>Email</mat-label>
+          <input matInput autocomplete="off" formControlName="email" />
+        </mat-form-field>
+        <span
+          class="error-span"
+          *ngIf="
+            myForm.get('email')?.hasError('email') &&
+            myForm.get('email')?.touched
+          "
+          >Enter a valid Email.</span
+        >
+      </div>
+      <div>
+        <mat-form-field style="font-size: 16px; width: 100%">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <span
+          *ngIf="
+            myForm.get('password')?.hasError('required') &&
+            myForm.get('password')?.touched
+          "
+          class="error-span"
+          >Enter a valid password.</span
+        >
+      </div>
+    </form>
+    <div class="buttons-container">
+      <button
+        mat-flat-button
+        color="primary"
+        style="width: 100%; border-radius: 20px"
+        [disabled]="loading || myForm.invalid"
+        (click)="logIn()"
+      >
+        Log in
+      </button>
+      <p class="user-interaction">
+        Not registered?
+        <a rouuterLink="/restore-password">Create user</a>
+      </p>
+    </div>
+  </div>
+</div>

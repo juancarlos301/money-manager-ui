@@ -1,0 +1,93 @@
+$navbarHeight: 64px;
+$footerHeight: 20px;
+
+.container-login {
+  width: 100%;
+  height: calc(100vh - $navbarHeight - $footerHeight);
+  display: flex;
+  align-items: center;
+  background-color: #cccccc;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+.container-form {
+  width: 45%;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #43494f;
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  height: 85%;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+.container-form form {
+  width: 80%;
+}
+.container-form form div {
+  width: 100%;
+}
+h3 {
+  text-align: center;
+}
+
+img {
+  border-radius: 8px;
+  height: 120px;
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+.error-span {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 20px;
+}
+
+.user-interaction {
+  &p {
+    margin: 0;
+    text-align: center;
+  }
+
+  a {
+    color: #3f51b5;
+  }
+
+  &.forgot {
+    text-align: right;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+  }
+}
+
+.buttons-container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 15px;
+  flex-direction: column;
+
+  @media (max-width: 1000px) {
+    justify-content: center;
+    width: 90%;
+  }
+}
+.buttons-container p {
+  margin: 0;
+}
