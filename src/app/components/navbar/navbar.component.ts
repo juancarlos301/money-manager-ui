@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material.module';
+import { MatSidenav } from '@angular/material/sidenav';
+
 
 
 @Component({
@@ -10,5 +12,22 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+    @ViewChild('sidenav') 
+     private sideMenu!: MatSidenav;
+
+  onResize(event:Event):void{
+
+    if (event.target instanceof Window) {
+      
+      let widthWindow:number =(event.target as Window).innerWidth;
+
+      if(widthWindow > 800){
+        this.sideMenu.close();
+      }
+
+    }
+
+  }
 
 }
