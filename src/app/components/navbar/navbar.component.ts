@@ -16,11 +16,16 @@ export class NavbarComponent {
     @ViewChild('sidenav') 
      private sideMenu!: MatSidenav;
 
-  onResize(event:any):void{
-    let widthWindow: number = event.target.innerWidth;
+  onResize(event:Event):void{
 
-    if(widthWindow > 800){
-      this.sideMenu.close();
+    if (event.target instanceof Window) {
+      
+      let widthWindow:number =(event.target as Window).innerWidth;
+
+      if(widthWindow > 800){
+        this.sideMenu.close();
+      }
+
     }
 
   }
