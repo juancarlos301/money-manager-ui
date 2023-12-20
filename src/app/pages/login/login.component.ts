@@ -48,8 +48,6 @@ export class LoginComponent {
   }
 
   logIn() {
-    console.log(this.myForm);
-
     this.loading = true;
     const user = {
       email: this.myForm?.get('email')?.value || '',
@@ -58,8 +56,6 @@ export class LoginComponent {
 
     this._authService.login(user as AuthUserType).subscribe({
       next: (res) => {
-        console.log(res);
-
         this.openSnackBar('you logged in successfully.', '');
 
         setTimeout(() => {

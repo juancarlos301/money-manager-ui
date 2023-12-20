@@ -1,9 +1,6 @@
-$navbarHeight: 64px;
-$footerHeight: 20px;
-
 .container-login {
   width: 100%;
-  height: calc(100vh - $navbarHeight - $footerHeight);
+  height: 100vh;
   display: flex;
   align-items: center;
   background-color: #cccccc;
