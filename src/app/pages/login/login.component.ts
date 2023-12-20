@@ -4,24 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { MatFormFieldModule } from '@angular/material/form-field'; // change this for angular module
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-
 import { AuthService } from '../../services';
 import { AuthUserType } from '../../types';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    AngularCommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
+  imports: [AngularCommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
