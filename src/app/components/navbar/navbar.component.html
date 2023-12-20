@@ -1,4 +1,63 @@
+<div style="height: 100vh;" (window:resize)="onResize($event)"> 
+    <mat-toolbar color="primary">
+      <div class="container-header">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <a mat-button class="companyName" routerLink="/">
+            <span>MONEY MANAGER</span>
+          </a>
+      </div>
+  
 
-<mat-toolbar color="primary">
-    <span>Money Manager</span>
-</mat-toolbar>
+      <div class="container-items-desktop">
+        <div class="menu-routes">
+            <a mat-button routerLink="/prices">Home</a>
+            <a mat-button routerLink="/about-us">Graphics</a>
+            <a mat-button routerLink="/start-page">Accounts</a>
+        </div>
+
+        <button class="icon-person" mat-mini-fab [matMenuTriggerFor]="menu" color="primary" aria-label="Example icon button with a menu icon">
+            <mat-icon>person</mat-icon>
+         </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Sign In</button>
+            <button mat-menu-item>Register</button>
+        </mat-menu>
+      </div>
+  
+    </mat-toolbar>
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav opened="false" mode="side" style="width: 300px;">
+            <mat-nav-list>
+    
+                <mat-list-item  class="mat-list-item" >
+                    <div class="cont-items">
+                        <mat-icon mat-list-icon>home</mat-icon>
+                        <div mat-line class="text-menu">Home</div>
+                    </div>
+                </mat-list-item>
+    
+                <mat-list-item  class="mat-list-item" >
+                    <div class="cont-items">
+                        <mat-icon mat-list-icon>trending_up</mat-icon>
+                        <div mat-line class="text-menu">Graphics</div>
+                    </div>
+                </mat-list-item>
+
+                <mat-list-item  class="mat-list-item" >
+                    <div class="cont-items">
+                        <mat-icon mat-list-icon>account_circle</mat-icon>
+                        <div mat-line class="text-menu">Accounts</div>
+                    </div>
+                </mat-list-item>
+            </mat-nav-list>
+        </mat-sidenav>
+    
+        <mat-sidenav-content>
+            <div style="height: 90vh;">
+                <p>Hola</p>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

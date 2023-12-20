@@ -1,0 +1,46 @@
+.mat-toolbar{
+    justify-content: space-between;
+}
+
+span{
+    margin-right: 3rem;
+}
+
+.container-header{
+    display: flex;
+    align-items: center;
+}
+
+.container-items-desktop{
+    display: flex;
+    align-items: center;
+}
+
+.container-header button {
+    display: none;
+}
+
+.icon-person{
+    box-shadow: none !important;
+}
+
+.cont-items{
+    display: flex;
+}
+
+.cont-items mat-icon{
+    padding-right: 0.8rem;
+}
+
+
+@media (max-width:800px) {
+
+    .menu-routes{
+        display: none;
+    }
+
+    .container-header button{
+        display: block;
+    }
+}
+
