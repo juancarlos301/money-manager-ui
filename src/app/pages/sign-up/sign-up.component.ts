@@ -52,7 +52,7 @@ export class SignUpComponent {
 
         setTimeout(() => {
           this.loading = false;
-          this.route.navigate(['/']);
+          this.route.navigate(['/login']);
         }, 2000);
       },
       error: (error) => {
