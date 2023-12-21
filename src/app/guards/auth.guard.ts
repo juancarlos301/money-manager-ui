@@ -3,12 +3,16 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services';
+import { chPerm } from '../helpers';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.validSessionToken()) {
+  if (
+    authService.validSessionToken() &&
+    chPerm(route.data['allowRoles'], authService.userInfo)
+  ) {
     return true;
   }
 
