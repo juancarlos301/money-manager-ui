@@ -41,7 +41,7 @@ export class AuthService {
 
   getAllUsers = (body?: { role?: string }) => {
     return this.http.post<{ users: AuthUserType[] }>(
-      `${environment.BACK_URL}/auth`,
+      `${environment.BACK_URL}/auth/getAll`,
       body
     );
   };
