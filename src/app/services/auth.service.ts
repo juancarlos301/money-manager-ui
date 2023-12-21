@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 
-import { AuthUserType } from '../types';
+import { AuthUserType, ResponseType } from '../types';
 import { environment } from '../../environments/environment';
+
 type SessionTokenType = {
   createdAt: string;
   email: string;
@@ -13,11 +14,6 @@ type SessionTokenType = {
   id: number;
   name: string;
   role: string;
-};
-
-type ResponseType<T> = {
-  success: boolean;
-  data: T;
 };
 
 @Injectable({
@@ -41,6 +37,20 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem('userToken');
     window.location.replace('/login');
+  };
+
+  singup = (body: AuthUserType) => {
+    return this.http.post<ResponseType<{ user: AuthUserType }>>(
+      `${environment.BACK_URL}/auth/create`,
+      body
+    );
+  };
+
+  getAllUsers = (body?: { client_id?: number }) => {
+    return this.http.post<{ users: AuthUserType[] }>(
+      `${environment.BACK_URL}/auth`,
+      body
+    );
   };
 
   getSession = () => {

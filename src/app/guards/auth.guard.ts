@@ -7,11 +7,10 @@ import { AuthService } from '../services';
 export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  console.log('hola');
 
   if (authService.validSessionToken()) {
     return true;
   }
 
-  return router.navigate(['login']);
+  return router.navigate(['/login']);
 };

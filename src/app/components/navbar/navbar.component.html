@@ -26,8 +26,10 @@
         <mat-icon>person</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Sign In</button>
-        <button mat-menu-item>Register</button>
+        <button mat-menu-item *ngIf="!logged" routerLink="/login">
+          Sign In
+        </button>
+        <button mat-menu-item *ngIf="logged" (click)="logOut()">Log Out</button>
       </mat-menu>
     </div>
   </mat-toolbar>

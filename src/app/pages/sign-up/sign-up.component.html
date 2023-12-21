@@ -8,6 +8,23 @@
           class="example-input"
           style="font-size: 16px; width: 100%"
         >
+          <mat-label>Name</mat-label>
+          <input matInput autocomplete="off" formControlName="name" />
+        </mat-form-field>
+        <span
+          class="error-span"
+          *ngIf="
+            myForm.get('name')?.hasError('required') &&
+            myForm.get('name')?.touched
+          "
+          >Enter a valid Name.</span
+        >
+      </div>
+      <div>
+        <mat-form-field
+          class="example-input"
+          style="font-size: 16px; width: 100%"
+        >
           <mat-label>Email</mat-label>
           <input matInput autocomplete="off" formControlName="email" />
         </mat-form-field>
@@ -55,19 +72,13 @@
         color="primary"
         style="width: 100%; border-radius: 20px"
         [disabled]="loading || myForm.invalid"
-        (click)="logIn()"
+        (click)="signUp()"
       >
-        Log in
+        Sign Up
       </button>
       <p class="user-interaction">
-        Not registered?
-        <a routerLink="/sign-up" style="cursor: pointer">Create user</a>
-      </p>
-      <p class="user-interaction">
-        Forgot your password?
-        <a routerLink="/restore-password" style="cursor: pointer"
-          >Change password</a
-        >
+        Have account?
+        <a routerLink="/login" style="cursor: pointer">Log In</a>
       </p>
     </div>
   </div>
