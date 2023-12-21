@@ -1,30 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 
-import { AuthUserType } from '../types';
+import { AuthUserType, ResponseType, SessionTokenType } from '../types';
 import { environment } from '../../environments/environment';
-type SessionTokenType = {
-  createdAt: string;
-  email: string;
-  exp: number;
-  iat: number;
-  id: number;
-  name: string;
-  role: string;
-};
-
-type ResponseType<T> = {
-  success: boolean;
-  data: T;
-};
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnInit {
+  userInfo: SessionTokenType = {} as SessionTokenType;
   constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.userInfo = this.getCurrentUser();
+  }
+
   login(body: AuthUserType) {
     return this.http
       .post<ResponseType<{ token: string }>>(
@@ -34,6 +26,7 @@ export class AuthService {
       .pipe(
         tap((response) => {
           localStorage.setItem('userToken', response?.data?.token);
+          this.userInfo = this.getCurrentUser();
           return response;
         })
       );
@@ -41,6 +34,20 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem('userToken');
     window.location.replace('/login');
+  };
+
+  singup = (body: AuthUserType) => {
+    return this.http.post<ResponseType<{ user: AuthUserType }>>(
+      `${environment.BACK_URL}/auth/create`,
+      body
+    );
+  };
+
+  getAllUsers = (body?: { client_id?: number }) => {
+    return this.http.post<{ users: AuthUserType[] }>(
+      `${environment.BACK_URL}/auth`,
+      body
+    );
   };
 
   getSession = () => {

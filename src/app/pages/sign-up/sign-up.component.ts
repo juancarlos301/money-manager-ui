@@ -8,13 +8,13 @@ import { AuthService } from '../../services';
 import { AuthUserType } from '../../types';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-sign-up',
   standalone: true,
   imports: [AngularCommonModule, AngularMaterialModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class LoginComponent {
+export class SignUpComponent {
   myForm!: FormGroup;
   hide = true;
   loading = false;
@@ -26,6 +26,7 @@ export class LoginComponent {
   ) {
     this.myForm = this.fb.group({
       password: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
@@ -36,16 +37,18 @@ export class LoginComponent {
     });
   }
 
-  logIn() {
+  signUp() {
     this.loading = true;
     const user = {
+      name: this.myForm?.get('name')?.value || '',
       email: this.myForm?.get('email')?.value || '',
       password: this.myForm?.get('password')?.value || '',
+      role: 'admin',
     };
 
-    this._authService.login(user as AuthUserType).subscribe({
+    this._authService.singup(user as AuthUserType).subscribe({
       next: (res) => {
-        this.openSnackBar('you logged in successfully.', '');
+        this.openSnackBar('you signed up successfully.', '');
 
         setTimeout(() => {
           this.loading = false;
@@ -55,7 +58,7 @@ export class LoginComponent {
       error: (error) => {
         console.error(error);
         this.loading = false;
-        this.openSnackBar('Failed to log in, please try again.', '');
+        this.openSnackBar('Failed to sign up, please try again.', '');
       },
     });
   }

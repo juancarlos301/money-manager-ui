@@ -3,18 +3,19 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services';
-import { chPerm } from '../helpers';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const noAuthGuard: CanActivateFn = (route) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+  const routesWithoutNeedSessionToken = ['login', 'sign-up'];
+
   if (
-    authService.validSessionToken() &&
-    chPerm(route.data['allowRoles'], authService.userInfo)
+    !authService.validSessionToken() &&
+    routesWithoutNeedSessionToken.includes(route.routeConfig?.path as string)
   ) {
     return true;
   }
 
-  return router.navigate(['/login']);
+  return router.navigate(['/']);
 };
