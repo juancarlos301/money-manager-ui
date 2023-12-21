@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 
@@ -9,13 +9,9 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+export class AuthService {
   userInfo: SessionTokenType = {} as SessionTokenType;
   constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.userInfo = this.getCurrentUser();
-  }
 
   login(body: AuthUserType) {
     return this.http
@@ -43,9 +39,9 @@ export class AuthService implements OnInit {
     );
   };
 
-  getAllUsers = (body?: { client_id?: number }) => {
+  getAllUsers = (body?: { role?: string }) => {
     return this.http.post<{ users: AuthUserType[] }>(
-      `${environment.BACK_URL}/auth`,
+      `${environment.BACK_URL}/auth/getAll`,
       body
     );
   };
@@ -68,4 +64,8 @@ export class AuthService implements OnInit {
       return {} as SessionTokenType;
     }
   };
+
+  checkCurrentUserInfo() {
+    this.userInfo = this.getCurrentUser();
+  }
 }
