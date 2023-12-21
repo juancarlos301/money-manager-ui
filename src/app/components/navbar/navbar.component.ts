@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AngularMaterialModule, AngularCommonModule } from '../../shared';
 import { MatSidenav } from '@angular/material/sidenav';
-import { AuthService } from '../../services';
 
+import { AngularMaterialModule, AngularCommonModule } from '../../shared';
+import { AuthService } from '../../services';
+import { chPerm } from '../../helpers/role';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -35,5 +36,9 @@ export class NavbarComponent implements OnInit {
 
   logOut() {
     this._authService.logout();
+  }
+
+  checkPerm(profile: string[], strict?: boolean) {
+    return chPerm(profile, this._authService.userInfo, !!strict);
   }
 }

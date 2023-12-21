@@ -1,0 +1,1 @@
+export { chPerm } from './role';
