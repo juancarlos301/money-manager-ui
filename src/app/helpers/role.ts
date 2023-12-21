@@ -14,7 +14,7 @@ export const chPerm: ChPermParamsType = (
   if (currentUser && currentUser.role) {
     return profile.includes(currentUser.role)
       ? true
-      : currentUser.role.includes('totalAccess') && !strict;
+      : currentUser.role.includes('superadmin') && !strict;
   }
   return false;
 };

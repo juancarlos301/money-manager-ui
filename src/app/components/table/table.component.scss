@@ -1,0 +1,10 @@
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-quartz.css";
+
+.ag-theme-alpine {
+  --ag-grid-size: 4px;
+}
+
+.header-one {
+  background-color: #b5b2b2;
+}

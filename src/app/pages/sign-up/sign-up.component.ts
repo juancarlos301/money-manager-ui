@@ -43,7 +43,7 @@ export class SignUpComponent {
       name: this.myForm?.get('name')?.value || '',
       email: this.myForm?.get('email')?.value || '',
       password: this.myForm?.get('password')?.value || '',
-      role: 'admin',
+      role: 'superadmin',
     };
 
     this._authService.singup(user as AuthUserType).subscribe({
