@@ -6,6 +6,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularCommonModule, AngularMaterialModule } from '../../shared';
 import { AuthService } from '../../services';
 import { AuthUserType } from '../../types';
+import { MatDialog } from '@angular/material/dialog';
+
+import { RecoverPassworsModalComponent } from '../../modals';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +25,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private _authService: AuthService,
     private route: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     this.myForm = this.fb.group({
       password: ['', [Validators.required]],
@@ -54,5 +58,14 @@ export class LoginComponent {
         this.openSnackBar('Failed to log in, please try again.', '');
       },
     });
+  }
+
+  showModalRecoverPass():void{
+
+    this.dialog.open(RecoverPassworsModalComponent, {
+      disableClose: false,
+      width: '40%'
+    });
+
   }
 }

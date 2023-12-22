@@ -1,0 +1,1 @@
+export { ChangePasswordModalComponent  } from './change-password-modal.component';
