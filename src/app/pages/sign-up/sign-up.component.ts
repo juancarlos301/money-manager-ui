@@ -48,12 +48,8 @@ export class SignUpComponent {
 
     this._authService.singup(user as AuthUserType).subscribe({
       next: (res) => {
-        this.openSnackBar('you signed up successfully.', '');
-
-        setTimeout(() => {
-          this.loading = false;
-          this.route.navigate(['/login']);
-        }, 2000);
+        this.loading = false;
+        this.route.navigate(['/login']);
       },
       error: (error) => {
         console.error(error);

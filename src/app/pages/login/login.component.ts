@@ -32,7 +32,7 @@ export class LoginComponent {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 1000,
     });
   }
 
@@ -45,12 +45,8 @@ export class LoginComponent {
 
     this._authService.login(user as AuthUserType).subscribe({
       next: (res) => {
-        this.openSnackBar('you logged in successfully.', '');
-
-        setTimeout(() => {
-          this.loading = false;
-          this.route.navigate(['/']);
-        }, 2000);
+        this.loading = false;
+        this.route.navigate(['/']);
       },
       error: (error) => {
         console.error(error);

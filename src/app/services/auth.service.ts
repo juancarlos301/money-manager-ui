@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
+import { Subject } from 'rxjs';
 
 import { AuthUserType, ResponseType, SessionTokenType } from '../types';
 import { environment } from '../../environments/environment';
@@ -11,6 +12,8 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   userInfo: SessionTokenType = {} as SessionTokenType;
+  userInfoChanged = new Subject<SessionTokenType>();
+
   constructor(private http: HttpClient) {}
 
   login(body: AuthUserType) {
@@ -23,6 +26,7 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('userToken', response?.data?.token);
           this.userInfo = this.getCurrentUser();
+          this.userInfoChanged.next(this.userInfo);
           return response;
         })
       );
@@ -30,6 +34,7 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem('userToken');
     window.location.replace('/login');
+    this.userInfoChanged.next({} as SessionTokenType);
   };
 
   singup = (body: AuthUserType) => {
