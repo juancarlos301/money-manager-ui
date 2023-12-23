@@ -1,8 +1,12 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { AngularMaterialModule, AngularCommonModule, ShowMessageService } from '../../shared';
+import {
+  AngularMaterialModule,
+  AngularCommonModule,
+  ShowMessageService,
+} from '../../shared';
 
-import { RecoverPasswordService } from '../../services';
+import { AuthService } from '../../services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ChangePasswordModalComponent } from '../change-password-modal';
@@ -20,7 +24,7 @@ export class RecoverPassworsModalComponent {
 
   constructor(
     private fb: FormBuilder,
-    private _recoverPasswordService: RecoverPasswordService,
+    private _authService: AuthService,
     private _showMessageService: ShowMessageService,
     private _snackBar: MatSnackBar,
     private currentModal: MatDialogRef<RecoverPassworsModalComponent>,
@@ -35,12 +39,15 @@ export class RecoverPassworsModalComponent {
     this.loading = true;
     const email: string = this.myFormRecover?.get('email')?.value || '';
 
-    this._recoverPasswordService.recoverPassword(email).subscribe({
+    this._authService.recoverPassword({ email }).subscribe({
       next: (res) => {
         if (res.success) {
           this.currentModal.close('true');
 
-          this._showMessageService.showMessage('A passcode was send to the email.', 4000);
+          this._showMessageService.showMessage(
+            'A passcode was send to the email.',
+            4000
+          );
 
           this.dialog.open(ChangePasswordModalComponent, {
             disableClose: true,
@@ -53,9 +60,11 @@ export class RecoverPassworsModalComponent {
       },
       error: (error) => {
         this.loading = false;
-        this._showMessageService.showMessage('Failed to recover password, please try again.', 2000);
+        this._showMessageService.showMessage(
+          'Failed to recover password, please try again.',
+          2000
+        );
       },
     });
   }
-
 }

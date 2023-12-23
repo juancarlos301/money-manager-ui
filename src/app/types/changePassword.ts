@@ -1,5 +1,5 @@
 export type ChangePasswordType = {
-    restoreCode: string;
-    password: string;
-    email:string;
+  restoreCode: string;
+  newPassword: string;
+  email: string;
 };

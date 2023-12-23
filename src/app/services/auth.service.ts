@@ -4,7 +4,12 @@ import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { Subject } from 'rxjs';
 
-import { AuthUserType, ResponseType, SessionTokenType } from '../types';
+import {
+  AuthUserType,
+  ResponseType,
+  SessionTokenType,
+  ChangePasswordType,
+} from '../types';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -43,6 +48,20 @@ export class AuthService {
       body
     );
   };
+
+  recoverPassword(email: { email: string }) {
+    return this.http.post<ResponseType<string>>(
+      `${environment.BACK_URL}/auth/restore-password/send-email`,
+      email
+    );
+  }
+
+  changePassword(body: ChangePasswordType) {
+    return this.http.post<ResponseType<string>>(
+      `${environment.BACK_URL}/auth/restore-password`,
+      body
+    );
+  }
 
   getAllUsers = (body?: { role?: string }) => {
     return this.http.post<{ users: AuthUserType[] }>(
