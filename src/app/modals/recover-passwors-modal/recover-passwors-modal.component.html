@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Recover Password</h2>
+
+<mat-dialog-content class="mat-container">
+  <form [formGroup]="myFormRecover" class="full-width">
+    <mat-grid-list cols="1" rowHeight="90px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput autocomplete="off" formControlName="email" />
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="loading || myFormRecover.invalid"
+    (click)="recoverPassword()"
+  >
+    Recover Password
+  </button>
+</mat-dialog-actions>

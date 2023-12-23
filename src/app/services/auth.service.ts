@@ -2,8 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
+import { Subject } from 'rxjs';
 
-import { AuthUserType, ResponseType, SessionTokenType } from '../types';
+import {
+  AuthUserType,
+  ResponseType,
+  SessionTokenType,
+  ChangePasswordType,
+} from '../types';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,6 +17,8 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   userInfo: SessionTokenType = {} as SessionTokenType;
+  userInfoChanged = new Subject<SessionTokenType>();
+
   constructor(private http: HttpClient) {}
 
   login(body: AuthUserType) {
@@ -23,6 +31,7 @@ export class AuthService {
         tap((response) => {
           localStorage.setItem('userToken', response?.data?.token);
           this.userInfo = this.getCurrentUser();
+          this.userInfoChanged.next(this.userInfo);
           return response;
         })
       );
@@ -30,6 +39,7 @@ export class AuthService {
   logout = () => {
     localStorage.removeItem('userToken');
     window.location.replace('/login');
+    this.userInfoChanged.next({} as SessionTokenType);
   };
 
   singup = (body: AuthUserType) => {
@@ -38,6 +48,20 @@ export class AuthService {
       body
     );
   };
+
+  recoverPassword(email: { email: string }) {
+    return this.http.post<ResponseType<string>>(
+      `${environment.BACK_URL}/auth/restore-password/send-email`,
+      email
+    );
+  }
+
+  changePassword(body: ChangePasswordType) {
+    return this.http.post<ResponseType<string>>(
+      `${environment.BACK_URL}/auth/restore-password`,
+      body
+    );
+  }
 
   getAllUsers = (body?: { role?: string }) => {
     return this.http.post<{ users: AuthUserType[] }>(
