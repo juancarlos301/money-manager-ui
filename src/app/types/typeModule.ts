@@ -1,4 +1,4 @@
-export enum Modules {
+export enum modules {
 	EXPENSES,
 	INCOMES
 }

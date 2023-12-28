@@ -6,7 +6,7 @@ import {
 } from '../../shared';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ExpensesOrIncomesType, Modules, TranferDataModalType } from '../../types';
+import { ExpensesOrIncomesType, modules, TranferDataModalType } from '../../types';
 
 @Component({
   selector: 'app-dynamic-expense-income-modal',
