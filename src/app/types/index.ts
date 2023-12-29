@@ -2,7 +2,7 @@ export { AuthUserType, SessionTokenType } from './auth';
 export { ChangePasswordType } from './changePassword';
 export { CategoryPurpose } from './typeModule';
 export { TranferDataModalType } from './transferData';
-export { ExpensesOrIncomesType } from './expensesOrIncomes';
+export { RegisterType } from './registerType';
 export { CategoryType } from './categoryType';
 
 export type ResponseType<T> = {

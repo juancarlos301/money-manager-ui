@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import {
-  ExpensesOrIncomesType,
+  RegisterType,
   CategoryType,
   TranferDataModalType,
   CategoryPurpose,
@@ -66,7 +66,7 @@ export class DynamicExpenseIncomeModalComponent {
     private _showMessageService: ShowMessageService,
     private currentModal: MatDialogRef<DynamicExpenseIncomeModalComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: TranferDataModalType<ExpensesOrIncomesType>
+    public data: TranferDataModalType<RegisterType>
   ) {
     this.myForm = this.fb.group({
       value: ['', [Validators.required]],
@@ -119,20 +119,20 @@ export class DynamicExpenseIncomeModalComponent {
 
     if (this.module == CategoryPurpose.Expenses) {
       if (this.action == 'Add') {
-        this.addExpense(dataCategoryOrIncome as ExpensesOrIncomesType);
+        this.addExpense(dataCategoryOrIncome as RegisterType);
       } else {
-        this.editExpense(dataCategoryOrIncome as ExpensesOrIncomesType);
+        this.editExpense(dataCategoryOrIncome as RegisterType);
       }
     } else {
       if (this.action == 'Add') {
-        this.addIncome(dataCategoryOrIncome as ExpensesOrIncomesType);
+        this.addIncome(dataCategoryOrIncome as RegisterType);
       } else {
-        this.editIncome(dataCategoryOrIncome as ExpensesOrIncomesType);
+        this.editIncome(dataCategoryOrIncome as RegisterType);
       }
     }
   }
 
-  addExpense(data: ExpensesOrIncomesType): void {
+  addExpense(data: RegisterType): void {
     this._expenseService.addExpense(data).subscribe({
       next: (res) => {
         if (res.success) {
@@ -156,7 +156,7 @@ export class DynamicExpenseIncomeModalComponent {
     });
   }
 
-  editExpense(data: ExpensesOrIncomesType): void {
+  editExpense(data: RegisterType): void {
     this._expenseService.editExpense(data).subscribe({
       next: (res) => {
         if (res.success) {
@@ -180,7 +180,7 @@ export class DynamicExpenseIncomeModalComponent {
     });
   }
 
-  addIncome(data: ExpensesOrIncomesType): void {
+  addIncome(data: RegisterType): void {
     this._incomeService.addIncome(data).subscribe({
       next: (res) => {
         if (res.success) {
@@ -204,7 +204,7 @@ export class DynamicExpenseIncomeModalComponent {
     });
   }
 
-  editIncome(data: ExpensesOrIncomesType): void {
+  editIncome(data: RegisterType): void {
     this._incomeService.editIncome(data).subscribe({
       next: (res) => {
         if (res.success) {

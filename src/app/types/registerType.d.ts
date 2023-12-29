@@ -1,4 +1,4 @@
-export type ExpensesOrIncomesType = {
+export type RegisterType = {
   id: number;
   createAt: Date;
   updatedAt: Date;

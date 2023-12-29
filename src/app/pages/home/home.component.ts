@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularCommonModule, AngularMaterialModule } from '../../shared';
 import { ColDef } from 'ag-grid-community';
 import {
-  ExpensesOrIncomesType,
+  RegisterType,
   CategoryPurpose,
   TranferDataModalType,
 } from '../../types';
