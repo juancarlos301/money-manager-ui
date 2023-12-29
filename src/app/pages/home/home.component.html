@@ -1,9 +1,11 @@
 <mat-tab-group>
   <mat-tab label="Expenses">
     <ng-template matTabContent>
-        <button mat-raised-button color="primary" (click)="addExpense()">Add Expense</button>
+      <button mat-raised-button color="primary" (click)="addExpense()">
+        Add Expense
+      </button>
     </ng-template>
-    
+
     <!-- 
         <ag-grid-angular
         [columnDefs]="columnDefs"
@@ -12,10 +14,11 @@
       ></ag-grid-angular> 
      -->
   </mat-tab>
-  <mat-tab label="Incomes"> 
+  <mat-tab label="Incomes">
     <ng-template matTabContent>
-        <button mat-raised-button color="primary" (click)="addExpense()">Add Income</button>
+      <button mat-raised-button color="primary" (click)="addIncome()">
+        Add Income
+      </button>
     </ng-template>
-    
   </mat-tab>
 </mat-tab-group>
