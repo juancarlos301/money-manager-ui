@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -24,7 +25,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatDialogModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
   ],
   exports: [
     MatToolbarModule,
@@ -37,7 +39,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     MatDialogModule,
     MatGridListModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule,
   ],
 })
 export class AngularMaterialModule {}

@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>{{ categoryType }}</h2>
+
+<mat-dialog-content class="mat-container">
+  <form class="full-width" [formGroup]="myForm">
+    <mat-grid-list cols="1" rowHeight="90px">
+      <mat-grid-tile style="justify-content: center">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label> Name</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            type="text"
+            formControlName="name"
+          />
+          <mat-icon matSuffix>face</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Purpose</mat-label>
+          <mat-select formControlName="purpose">
+            @for (option of options; track option) {
+            <mat-option [value]="option">{{ option | uppercase }}</mat-option>
+            }
+          </mat-select>
+          <mat-icon matSuffix>swap_vertical_circle</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Icon</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            type="text"
+            formControlName="icon"
+          />
+          <mat-icon matSuffix>pets</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions
+  MatDialogActions.align="center"
+  style="justify-content: center"
+>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="loading || myForm.invalid"
+    (click)="saveCategory()"
+  >
+    Send
+  </button>
+  <button mat-button (click)="onNoClick()">Close</button>
+</mat-dialog-actions>

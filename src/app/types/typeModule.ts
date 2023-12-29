@@ -1,4 +1,4 @@
-export enum modules {
-	EXPENSES,
-	INCOMES
+export enum Example {
+  Expenses = 'expenses',
+  Incomes = 'incomes',
 }

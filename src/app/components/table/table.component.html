@@ -1,4 +1,7 @@
-<div class="ag-theme-alpine" style="max-height: 65vh; width: 100%">
+<div
+  style="max-height: 65vh; width: 100%; height: 65vh"
+  class="ag-theme-alpine"
+>
   <ag-grid-angular
     [rowData]="data"
     [columnDefs]="columns"
@@ -6,6 +9,8 @@
     rowSelection="single"
     animateRows
     domLayout="autoHeight"
+    (gridReady)="onGridReady($event)"
+    (selectionChanged)="handleGetSelectedRows()"
   >
   </ag-grid-angular>
 </div>

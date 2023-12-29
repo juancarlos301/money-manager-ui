@@ -60,12 +60,10 @@ export class LoginComponent {
     });
   }
 
-  showModalRecoverPass():void{
-
+  showModalRecoverPass(): void {
     this.dialog.open(RecoverPassworsModalComponent, {
       disableClose: false,
-      width: '40%'
+      width: '40%',
     });
-
   }
 }
