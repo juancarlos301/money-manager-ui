@@ -25,7 +25,7 @@ export class CategoriesService {
   };
 
   getAllCategories = (body?: { purpose: string }) => {
-    return this.http.post<{ data: { categories: CategoryType[] } }>(
+    return this.http.post<ResponseType<{ categories: CategoryType[] }>>(
       `${environment.BACK_URL}/categories/getAll`,
       body
     );
