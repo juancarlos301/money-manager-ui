@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatGridListModule,
     MatTabsModule,
+    MatSelectModule,
     MatRadioModule,
   ],
   exports: [
@@ -40,6 +42,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDialogModule,
     MatGridListModule,
     MatTabsModule,
+    MatSelectModule,
     MatRadioModule,
   ],
 })

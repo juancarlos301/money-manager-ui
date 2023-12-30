@@ -1,0 +1,22 @@
+<div style="margin-top: 20px">
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" (click)="openCreateModal()">
+      Add Category
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="openEditModal()"
+      [disabled]="!selectedCategory"
+    >
+      edit Category
+    </button>
+  </div>
+
+  <app-table
+    [columns]="colDefs"
+    [data]="data"
+    (selectedRow)="handleGetSelectedCategory($event)"
+  >
+  </app-table>
+</div>

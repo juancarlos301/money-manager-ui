@@ -36,25 +36,25 @@ export class DynamicExpenseIncomeModalComponent {
     {
       id: 1,
       name: 'Electrónicos',
-      purpuse: 'EXPENSES',
+      purpose: 'EXPENSES',
       icon: 'cable',
     },
     {
       id: 2,
       name: 'Ropa',
-      purpuse: 'EXPENSES',
+      purpose: 'EXPENSES',
       icon: 'styler',
     },
     {
       id: 3,
       name: 'Libros',
-      purpuse: 'EXPENSES',
+      purpose: 'EXPENSES',
       icon: 'library_books',
     },
     {
       id: 4,
       name: 'Deportes',
-      purpuse: 'INCOMES',
+      purpose: 'INCOMES',
       icon: 'sports_soccer',
     },
   ];
@@ -78,7 +78,7 @@ export class DynamicExpenseIncomeModalComponent {
 
     if (this.module == CategoryPurpose.Expenses) {
       this.categories = this.categoriesAll.filter(
-        (x) => x.purpuse == 'EXPENSES'
+        (x) => x.purpose == 'EXPENSES'
       );
 
       if (this.action == 'Add') {
@@ -90,7 +90,7 @@ export class DynamicExpenseIncomeModalComponent {
       }
     } else {
       this.categories = this.categoriesAll.filter(
-        (x) => x.purpuse == 'INCOMES'
+        (x) => x.purpose == 'INCOMES'
       );
 
       if (this.action == 'Add') {

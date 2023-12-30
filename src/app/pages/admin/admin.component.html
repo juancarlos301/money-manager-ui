@@ -1,3 +1,14 @@
 <div>
-  <app-table [columns]="colDefs" [data]="data"> </app-table>
+  <mat-tab-group>
+    <mat-tab label="Users">
+      <ng-template matTabContent>
+        <app-users />
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Categories">
+      <ng-template matTabContent>
+        <app-categories />
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </div>
