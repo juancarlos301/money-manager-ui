@@ -8,10 +8,9 @@ describe('DynamicExpenseIncomeModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DynamicExpenseIncomeModalComponent]
-    })
-    .compileComponents();
-    
+      imports: [DynamicExpenseIncomeModalComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(DynamicExpenseIncomeModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
