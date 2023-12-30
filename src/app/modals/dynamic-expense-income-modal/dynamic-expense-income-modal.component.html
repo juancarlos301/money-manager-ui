@@ -1,47 +1,53 @@
-<h2 mat-dialog-title>Change Password</h2>
+<h2 mat-dialog-title>{{ this.title }}</h2>
 
 <mat-dialog-content class="mat-container">
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline" class="full-fit-field">
+      <mat-label>Value</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        type="number"
+        formControlName="value"
+      />
+      <mat-icon matSuffix>price</mat-icon>
+    </mat-form-field>
 
+    <div class="container-label">
+      <mat-label>Categories</mat-label>
+    </div>
 
-
-  <form  class="full-width">
-    <mat-grid-list cols="1" rowHeight="90px">
-      <mat-grid-tile>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Expense Name</mat-label>
-          <input matInput autocomplete="off" type="text"  />
-          <mat-icon matSuffix>password</mat-icon>
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Categories</mat-label>
-          <input matInput autocomplete="off" type="password"  />
-          <mat-icon matSuffix>key</mat-icon>
-        </mat-form-field>
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Confirm password</mat-label>
-          <input matInput autocomplete="off" type="password"  />
-          <mat-icon matSuffix>key</mat-icon>
-        </mat-form-field>
-      </mat-grid-tile>
-
-    </mat-grid-list>
+    <mat-radio-group
+      aria-label="Select a category"
+      formControlName="category"
+      id="category"
+    >
+      <mat-radio-button
+        style="margin-right: 20px"
+        class="mat-radio-container-no-show"
+        color="primary"
+        *ngFor="let opt of categories"
+        [value]="opt.id"
+      >
+        <mat-icon
+          (click)="selectOption(opt.id)"
+          [ngClass]="optionSelected == opt.id ? 'selected-option' : ''"
+          width="100px"
+          matSuffix
+          >{{ opt.icon }}</mat-icon
+        >
+      </mat-radio-button>
+    </mat-radio-group>
   </form>
-
 </mat-dialog-content>
 
-<mat-dialog-actions align="center">
+<mat-dialog-actions MatDialogActions.align="center">
   <button
     mat-raised-button
     color="primary"
+    [disabled]="loading || myForm.invalid"
+    (click)="doTask()"
   >
-    Change Password
+    {{ this.title }}
   </button>
-
-
 </mat-dialog-actions>

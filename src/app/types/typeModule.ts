@@ -1,4 +1,4 @@
-export enum modules {
-	EXPENSES,
-	INCOMES
+export enum CategoryPurpose {
+  Expenses = 'expenses',
+  Incomes = 'incomes',
 }

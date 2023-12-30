@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AngularCommonModule, AngularMaterialModule } from '../../shared';
 import { ColDef } from 'ag-grid-community';
 import {
-  ExpensesOrIncomesType,
-  Modules,
+  RegisterType,
+  CategoryPurpose,
   TranferDataModalType,
 } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,18 +38,30 @@ export class HomeComponent {
   ];
 
   addExpense(): void {
-
     const dataToModal = {
       data: null,
-      module: Modules[Modules.EXPENSES],
+      module: CategoryPurpose.Expenses,
       action: 'Add',
     };
 
     this.dialog.open(DynamicExpenseIncomeModalComponent, {
-      disableClose: true,
+      disableClose: false,
       data: dataToModal as TranferDataModalType<null>,
       width: '40%',
     });
-    
+  }
+
+  addIncome(): void {
+    const dataToModal = {
+      data: null,
+      module: CategoryPurpose.Incomes,
+      action: 'Add',
+    };
+
+    this.dialog.open(DynamicExpenseIncomeModalComponent, {
+      disableClose: false,
+      data: dataToModal as TranferDataModalType<null>,
+      width: '40%',
+    });
   }
 }
