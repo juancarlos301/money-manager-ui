@@ -1,7 +1,7 @@
 export type CategoryType = {
   id?: number;
   name: string;
-  purpuse?: string;
+  purpose?: string;
   icon: string;
   deleted?: false;
 };

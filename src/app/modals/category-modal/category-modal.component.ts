@@ -8,7 +8,7 @@ import {
 } from '@angular/material/dialog';
 
 import { AngularMaterialModule, AngularCommonModule } from '../../shared';
-import { Example, CategoryType } from '../../types';
+import { CategoryPurpose, CategoryType } from '../../types';
 import { CategoriesService } from '../../services';
 
 @Component({
@@ -22,7 +22,7 @@ export class CategoryModalComponent implements OnInit {
   @Input() categoryType!: string;
 
   myForm!: FormGroup;
-  options = [Example.Expenses, Example.Incomes];
+  options = [CategoryPurpose.Expenses, CategoryPurpose.Incomes];
   loading = false;
 
   constructor(

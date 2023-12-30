@@ -40,7 +40,21 @@ export class HomeComponent {
   addExpense(): void {
     const dataToModal = {
       data: null,
-      module: Modules[Modules.EXPENSES],
+      module: CategoryPurpose.Expenses,
+      action: 'Add',
+    };
+
+    this.dialog.open(DynamicExpenseIncomeModalComponent, {
+      disableClose: false,
+      data: dataToModal as TranferDataModalType<null>,
+      width: '40%',
+    });
+  }
+
+  addIncome(): void {
+    const dataToModal = {
+      data: null,
+      module: CategoryPurpose.Incomes,
       action: 'Add',
     };
 
