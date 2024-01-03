@@ -9,3 +9,11 @@
 body{
     margin: 0;
 }
+
+.buttons-container {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    gap: 20px;
+  }

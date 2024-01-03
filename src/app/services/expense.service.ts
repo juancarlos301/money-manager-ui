@@ -11,7 +11,7 @@ export class ExpenseService {
   constructor(private http: HttpClient) {}
 
   getAllExpenses() {
-    return this.http.post<ResponseType<RegisterType>>(
+    return this.http.post<ResponseType<{ expenses: RegisterType[] }>>(
       `${environment.BACK_URL}/expenses/getAll`,
       {}
     );
@@ -31,7 +31,8 @@ export class ExpenseService {
     );
   }
 
-  deleteExpense(body: { body: RegisterType; deleted: true }) {
+  deleteExpense(body: RegisterType) {
+    console.log(body);
     return this.http.put<ResponseType<string>>(
       `${environment.BACK_URL}/expenses/update`,
       body

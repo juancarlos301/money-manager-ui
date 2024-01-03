@@ -1,6 +1,8 @@
 <h2 mat-dialog-title>{{ this.title }}</h2>
 
 <mat-dialog-content class="mat-container">
+  <pre>{{ myForm.value | json }}</pre>
+
   <form [formGroup]="myForm">
     <mat-form-field appearance="outline" class="full-fit-field">
       <mat-label>Value</mat-label>
@@ -30,6 +32,7 @@
         [value]="opt.id"
       >
         <mat-icon
+          style="cursor: pointer"
           (click)="selectOption(opt.id)"
           [ngClass]="optionSelected == opt.id ? 'selected-option' : ''"
           width="100px"

@@ -11,7 +11,7 @@ export class IncomeService {
   constructor(private http: HttpClient) {}
 
   getAllIncomes() {
-    return this.http.post<ResponseType<RegisterType>>(
+    return this.http.post<ResponseType<{ incomes: RegisterType[] }>>(
       `${environment.BACK_URL}/incomes/getAll`,
       {}
     );
@@ -31,7 +31,7 @@ export class IncomeService {
     );
   }
 
-  deleteIncome(body: { body: RegisterType; deleted: true }) {
+  deleteIncome(body: RegisterType) {
     return this.http.put<ResponseType<string>>(
       `${environment.BACK_URL}/incomes/update`,
       body
