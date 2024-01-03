@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   AngularMaterialModule,
   AngularCommonModule,
@@ -13,7 +13,11 @@ import {
   TranferDataModalType,
   CategoryPurpose,
 } from '../../types';
-import { ExpenseService, IncomeService } from '../../services';
+import {
+  CategoriesService,
+  ExpenseService,
+  IncomeService,
+} from '../../services';
 
 @Component({
   selector: 'app-dynamic-expense-income-modal',
@@ -22,7 +26,7 @@ import { ExpenseService, IncomeService } from '../../services';
   templateUrl: './dynamic-expense-income-modal.component.html',
   styleUrl: './dynamic-expense-income-modal.component.scss',
 })
-export class DynamicExpenseIncomeModalComponent {
+export class DynamicExpenseIncomeModalComponent implements OnInit {
   myForm: FormGroup;
   module!: string;
   action: string;
@@ -31,37 +35,12 @@ export class DynamicExpenseIncomeModalComponent {
   title: string = '';
   loading: boolean = false;
   id: number = -1;
-
-  categoriesAll: CategoryType[] = [
-    {
-      id: 1,
-      name: 'Electrónicos',
-      purpose: 'EXPENSES',
-      icon: 'cable',
-    },
-    {
-      id: 2,
-      name: 'Ropa',
-      purpose: 'EXPENSES',
-      icon: 'styler',
-    },
-    {
-      id: 3,
-      name: 'Libros',
-      purpose: 'EXPENSES',
-      icon: 'library_books',
-    },
-    {
-      id: 4,
-      name: 'Deportes',
-      purpose: 'INCOMES',
-      icon: 'sports_soccer',
-    },
-  ];
+  tranferedData: RegisterType | null = null;
 
   constructor(
     private fb: FormBuilder,
     private _expenseService: ExpenseService,
+    private _categoriesService: CategoriesService,
     private _incomeService: IncomeService,
     private _showMessageService: ShowMessageService,
     private currentModal: MatDialogRef<DynamicExpenseIncomeModalComponent>,
@@ -76,31 +55,49 @@ export class DynamicExpenseIncomeModalComponent {
     this.action = data.action;
     this.module = data.module;
 
+    this.tranferedData = data.data;
+  }
+  ngOnInit(): void {
     if (this.module == CategoryPurpose.Expenses) {
-      this.categories = this.categoriesAll.filter(
-        (x) => x.purpose == 'EXPENSES'
-      );
-
       if (this.action == 'Add') {
         this.id = -1;
         this.title = 'Add expense';
       } else {
-        this.id = data.data.id;
+        this.id = this.tranferedData?.id || 0;
         this.title = 'Edit expense';
+
+        this.myForm.setValue({
+          value: this.tranferedData?.value,
+          category: this.tranferedData?.category,
+        });
       }
     } else {
-      this.categories = this.categoriesAll.filter(
-        (x) => x.purpose == 'INCOMES'
-      );
-
       if (this.action == 'Add') {
         this.id = -1;
         this.title = 'Add income';
       } else {
-        this.id = data.data.id;
+        this.id = this.tranferedData?.id || 0;
         this.title = 'Edit income';
+
+        this.myForm.setValue({
+          value: this.tranferedData?.value,
+          category: this.tranferedData?.category,
+        });
       }
     }
+
+    this._categoriesService
+      .getAllCategories({ purpose: this.module })
+      .subscribe({
+        next: ({ data }) => {
+          this.categories = data.categories;
+          if (this.action == 'Edit')
+            this.optionSelected = this.tranferedData?.category || 0;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 
   selectOption(id?: number): void {

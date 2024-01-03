@@ -1,0 +1,30 @@
+<div style="margin-top: 20px">
+  <div class="buttons-container">
+    <button mat-raised-button color="primary" (click)="openAddModal()">
+      Add Expense
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="openEditModal()"
+      [disabled]="!selectedExpense"
+    >
+      edit expense
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="deleteExpense()"
+      [disabled]="!selectedExpense"
+    >
+      Delete Expense
+    </button>
+  </div>
+
+  <app-table
+    [columns]="colDefs"
+    [data]="data"
+    (selectedRow)="handleGetSelectedExpense($event)"
+  >
+  </app-table>
+</div>

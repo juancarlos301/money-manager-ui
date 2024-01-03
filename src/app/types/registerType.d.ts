@@ -5,4 +5,5 @@ export type RegisterType = {
   category: number;
   value: number;
   purpose: string;
+  deleted: boolean;
 };
