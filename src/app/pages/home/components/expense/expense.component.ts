@@ -2,28 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ColDef } from 'ag-grid-community';
 
-import { AngularMaterialModule } from '../../../shared';
+import { AngularMaterialModule } from '../../../../shared';
 import {
   CategoryPurpose,
   RegisterType,
   TranferDataModalType,
-} from '../../../types';
-import { DynamicExpenseIncomeModalComponent } from '../../../modals';
-import { TableComponent } from '../../../components';
-import { IncomeService } from '../../../services';
+} from '../../../../types';
+import { DynamicExpenseIncomeModalComponent } from '../../../../modals';
+import { TableComponent } from '../../../../components';
+import { ExpenseService } from '../../../../services';
 
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-income',
+  selector: 'app-expense',
   standalone: true,
   imports: [AngularMaterialModule, TableComponent],
-  templateUrl: './income.component.html',
-  styleUrl: './income.component.scss',
+  templateUrl: './expense.component.html',
+  styleUrl: './expense.component.scss',
 })
-export class IncomeComponent {
+export class ExpenseComponent implements OnInit {
   data: RegisterType[] = [];
-  selectedIncome: null | RegisterType = null;
+  selectedExpense: null | RegisterType = null;
 
   colDefs: ColDef[] = [
     { field: 'id', headerName: 'ID' },
@@ -33,17 +33,17 @@ export class IncomeComponent {
 
   constructor(
     private dialog: MatDialog,
-    private _incomeService: IncomeService
+    private _expenseService: ExpenseService
   ) {}
 
   ngOnInit(): void {
-    this.getAllIncomes();
+    this.getAllExpenses();
   }
 
-  getAllIncomes() {
-    this._incomeService.getAllIncomes().subscribe({
+  getAllExpenses() {
+    this._expenseService.getAllExpenses().subscribe({
       next: ({ data }) => {
-        this.data = data.incomes;
+        this.data = data.expenses;
       },
       error: (error) => {
         console.error(error);
@@ -51,14 +51,14 @@ export class IncomeComponent {
     });
   }
 
-  handleGetSelectedIncome(income: RegisterType) {
-    this.selectedIncome = income;
+  handleGetSelectedExpense(expense: RegisterType) {
+    this.selectedExpense = expense;
   }
 
   openAddModal(): void {
     const dataToModal = {
       data: null,
-      module: CategoryPurpose.Incomes,
+      module: CategoryPurpose.Expenses,
       action: 'Add',
     };
 
@@ -70,22 +70,22 @@ export class IncomeComponent {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result === 'income') {
-          this.selectedIncome = null;
-          this.getAllIncomes();
+        if (result === 'expense') {
+          this.selectedExpense = null;
+          this.getAllExpenses();
         }
       });
   }
 
   openEditModal() {
     const dataToModal = {
-      data: this.selectedIncome,
-      module: CategoryPurpose.Incomes,
+      data: this.selectedExpense,
+      module: CategoryPurpose.Expenses,
       action: 'Edit',
     };
 
-    this.selectedIncome!.value = Number(
-      this.selectedIncome?.value.toString().replace(/[^0-9\.]+/g, '')
+    this.selectedExpense!.value = Number(
+      this.selectedExpense?.value.toString().replace(/[^0-9\.]+/g, '')
     );
 
     this.dialog
@@ -96,14 +96,14 @@ export class IncomeComponent {
       })
       .afterClosed()
       .subscribe((result) => {
-        if (result === 'income') {
-          this.selectedIncome = null;
-          this.getAllIncomes();
+        if (result === 'expense') {
+          this.selectedExpense = null;
+          this.getAllExpenses();
         }
       });
   }
 
-  deleteIncome(): void {
+  deleteExpense(): void {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -114,19 +114,21 @@ export class IncomeComponent {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.selectedIncome!.deleted = true;
+        console.log(this.selectedExpense!);
 
-        this._incomeService.deleteIncome(this.selectedIncome!).subscribe({
+        this.selectedExpense!.deleted = true;
+
+        this._expenseService.deleteExpense(this.selectedExpense!).subscribe({
           next: (data) => {
             if (data.success) {
               Swal.fire({
                 title: 'Deleted!',
-                text: 'Your income has been deleted.',
+                text: 'Your expense has been deleted.',
                 icon: 'success',
               });
 
-              this.selectedIncome = null;
-              this.getAllIncomes();
+              this.selectedExpense = null;
+              this.getAllExpenses();
             }
           },
           error: (error) => {

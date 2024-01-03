@@ -5,8 +5,8 @@ import { RegisterType } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
 import { ExpenseService } from '../../services';
 
-import { ExpenseComponent } from './expense';
-import { IncomeComponent } from './income';
+import { ExpenseComponent } from './components/expense';
+import { IncomeComponent } from './components/income';
 
 @Component({
   selector: 'app-home',

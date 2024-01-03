@@ -63,7 +63,7 @@ export class DynamicExpenseIncomeModalComponent implements OnInit {
         this.id = -1;
         this.title = 'Add expense';
       } else {
-        this.id = this.tranferedData?.id!;
+        this.id = this.tranferedData?.id || 0;
         this.title = 'Edit expense';
 
         this.myForm.setValue({
@@ -76,7 +76,7 @@ export class DynamicExpenseIncomeModalComponent implements OnInit {
         this.id = -1;
         this.title = 'Add income';
       } else {
-        this.id = this.tranferedData?.id!;
+        this.id = this.tranferedData?.id || 0;
         this.title = 'Edit income';
 
         this.myForm.setValue({
@@ -92,7 +92,7 @@ export class DynamicExpenseIncomeModalComponent implements OnInit {
         next: ({ data }) => {
           this.categories = data.categories;
           if (this.action == 'Edit')
-            this.optionSelected = this.tranferedData?.category!;
+            this.optionSelected = this.tranferedData?.category || 0;
         },
         error: (error) => {
           console.error(error);
