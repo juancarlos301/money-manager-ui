@@ -7,6 +7,7 @@ import {
   AdminComponent,
 } from './pages';
 import { authGuard, noAuthGuard } from './guards';
+import { InfoComponent } from './pages/info';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,12 @@ export const routes: Routes = [
     canActivate: [authGuard],
     data: { allowRoles: ['client', 'admin'] },
     component: HomeComponent,
+  },
+  {
+    path: 'info/:index',
+    canActivate: [authGuard],
+    data: { allowRoles: ['client', 'admin'] },
+    component: InfoComponent,
   },
   {
     path: 'admin',

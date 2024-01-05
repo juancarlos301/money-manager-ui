@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -29,6 +30,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatSelectModule,
     MatRadioModule,
+    MatCardModule,
   ],
   exports: [
     MatToolbarModule,
@@ -44,6 +46,7 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTabsModule,
     MatSelectModule,
     MatRadioModule,
+    MatCardModule,
   ],
 })
 export class AngularMaterialModule {}
