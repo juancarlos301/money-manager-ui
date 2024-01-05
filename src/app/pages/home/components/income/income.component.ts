@@ -29,6 +29,7 @@ export class IncomeComponent {
     { field: 'id', headerName: 'ID' },
     { field: 'category', headerName: 'Category' },
     { field: 'value', headerName: 'Value' },
+    { field: 'category_info.name', headerName: 'Name Category' },
   ];
 
   constructor(
