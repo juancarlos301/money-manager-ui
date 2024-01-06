@@ -1,3 +1,5 @@
+import { CategoryType } from './categoryType';
+
 export type RegisterType = {
   id: number;
   createAt: Date;
@@ -6,4 +8,5 @@ export type RegisterType = {
   value: number;
   purpose: string;
   deleted: boolean;
+  category_info: CategoryType;
 };
