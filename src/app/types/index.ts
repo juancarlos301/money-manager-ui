@@ -4,6 +4,7 @@ export { CategoryPurpose } from './typeModule';
 export { TranferDataModalType } from './transferData';
 export { RegisterType } from './registerType';
 export { CategoryType } from './categoryType';
+export { BalanceResponseType } from './balance';
 
 export type ResponseType<T> = {
   success: boolean;
