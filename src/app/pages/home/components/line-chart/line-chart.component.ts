@@ -18,6 +18,7 @@ export class LineChartComponent implements OnInit {
     this.createChart();
   }
   createChart() {
+    console.log(this.data);
     this.chart = new Chart('LineChart', {
       type: 'line',
 
@@ -27,7 +28,7 @@ export class LineChartComponent implements OnInit {
             label: 'Incomes',
             data:
               this.data?.incomes?.map((item) => {
-                return { x: item.createAt, y: item.value };
+                return { x: item.createdAt, y: parseFloat(item.value) };
               }) || [],
             backgroundColor: '#f44336',
             borderColor: '#f44336',
@@ -37,7 +38,7 @@ export class LineChartComponent implements OnInit {
             label: 'Expenses',
             data:
               this.data?.expenses?.map((item) => {
-                return { x: item.createAt, y: item.value };
+                return { x: item.createdAt, y: parseFloat(item.value) };
               }) || [],
             backgroundColor: '#3f51b5',
             borderColor: '#3f51b5',
@@ -46,6 +47,8 @@ export class LineChartComponent implements OnInit {
         ],
       },
       options: {
+        maintainAspectRatio: false,
+        responsive: true,
         plugins: {
           tooltip: {
             backgroundColor: 'rgba(0, 0, 0, 0.7)',

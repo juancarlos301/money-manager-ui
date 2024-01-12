@@ -85,9 +85,9 @@ export class ExpenseComponent implements OnInit {
       action: 'Edit',
     };
 
-    this.selectedExpense!.value = Number(
+    this.selectedExpense!.value = `${Number(
       this.selectedExpense?.value.toString().replace(/[^0-9\.]+/g, '')
-    );
+    )}`;
 
     this.dialog
       .open(DynamicExpenseIncomeModalComponent, {

@@ -12,6 +12,8 @@ import { BalanceResponseType } from '../../../../types';
 })
 export class DoughnutChartComponent implements OnInit {
   @Input() data!: BalanceResponseType;
+  @Input() select: 'expenses' | 'incomes' = 'expenses';
+
   chart!: any;
 
   ngOnInit(): void {
@@ -23,11 +25,7 @@ export class DoughnutChartComponent implements OnInit {
       data: {
         datasets: [
           {
-            data: [10, 20, 30],
-            backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C'],
-          },
-          {
-            data: [10, 20, 30],
+            data: this.data[this.select].map((item) => parseFloat(item.value)),
             backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C'],
           },
         ],
