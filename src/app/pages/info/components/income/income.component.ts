@@ -85,9 +85,9 @@ export class IncomeComponent {
       action: 'Edit',
     };
 
-    this.selectedIncome!.value = Number(
+    this.selectedIncome!.value = `${Number(
       this.selectedIncome?.value.toString().replace(/[^0-9\.]+/g, '')
-    );
+    )}`;
 
     this.dialog
       .open(DynamicExpenseIncomeModalComponent, {
